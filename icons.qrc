@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/img">
+        <file alias="But1_1.png">resource/img/add.png</file>
+        <file alias="But1_2.png">resource/img/help.png</file>
+        <file alias="But1_3.png">resource/img/setting.png</file>
+        <file alias="But1_4.png">resource/img/style.png</file>
+        <file alias="But4_1.png">resource/img/link.png</file>
+        <file alias="But2_1.png">resource/img/list.png</file>
+        <file>resource/img/read.png</file>
+        <file>resource/img/readall.png</file>
+        <file alias="But3_1.png">resource/img/search.png</file>
+        <file alias="But4_3.png">resource/img/star.png</file>
+        <file alias="But4_4.png">resource/img/unread.png</file>
+        <file>resource/img/unstar.png</file>
+        <file>resource/img/unwait.png</file>
+        <file alias="But4_2.png">resource/img/wait.png</file>
+    </qresource>
+</RCC>
