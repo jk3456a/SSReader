@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "pch.h"
+#include "nettool.h"
 #include "sqltool.h"
 
 namespace Ui {
@@ -17,24 +18,15 @@ public:
     explicit SubsPage(QWidget *parent = nullptr);
     ~SubsPage();
 
-protected:
-    //void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_SubButton_clicked();
 
-    void replyFinished(QNetworkReply *);
-
 private:
     Ui::SubsPage *ui;
     QCompleter *completer;
-    QUrl url;
-    QNetworkRequest req;
-    QNetworkReply *reply;
-    QNetworkAccessManager *manager;
+    Internet *s_network;
     QStringList Routelist;
-    void httpRequest(const QUrl &requestedUrl);
-
 };
 
 #endif // SUBSPAGE_H

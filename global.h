@@ -21,7 +21,8 @@ extern QSqlDatabase db;
 extern QSqlQuery *query;
 
 extern const QString load_src;
-extern const QString load_overview;
+extern const QString load_rssurl;
+extern const QString load_all_article;
 extern const QString insert_src;
 extern const QString insert_art;
 extern const QString read_art;

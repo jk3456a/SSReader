@@ -33,6 +33,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QTextCodec>
+#include <ActiveQt/QAxWidget>
 
 #include <QFile>
 #include <QTextStream>

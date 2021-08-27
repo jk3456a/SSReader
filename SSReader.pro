@@ -1,4 +1,4 @@
-QT       += core gui sql network
+QT       += core gui sql network axcontainer
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,24 +18,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     global.cpp \
     loginpage.cpp \
+    nettool.cpp \
     settingpage.cpp \
     sqltool.cpp \
     main.cpp \
     mainwindow.cpp \
     subspage.cpp \
-    tinyxml2.cpp \
-    nettool.cpp
+    tinyxml2.cpp
 
 HEADERS += \
     global.h \
     loginpage.h \
+    nettool.h \
     settingpage.h \
     sqltool.h \
     mainwindow.h \
     pch.h \
     subspage.h \
-    tinyxml2.h \
-    nettool.h
+    tinyxml2.h
 
 
 # Default rules for deployment.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.1, 2021-08-20T10:32:42. -->
+<!-- Written by QtCreator 4.11.1, 2021-08-27T17:08:00. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -58,7 +58,8 @@
    <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey">
     <value type="QString">-fno-delayed-template-parsing</value>
    </valuelist>
-   <value type="bool" key="ClangCodeModel.UseGlobalConfig">true</value>
+   <value type="bool" key="ClangCodeModel.UseGlobalConfig">false</value>
+   <value type="QString" key="ClangCodeModel.WarningConfigId">{9f168f4f-87d9-447a-a95b-cf2e13859898}</value>
   </valuemap>
  </data>
  <data>
@@ -287,8 +288,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:G:/SSReader/SSReader/SSReader.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">G:/SSReader/SSReader/SSReader.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">SSReader2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:G:/program/SSReader/SSReader/SSReader.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">G:/program/SSReader/SSReader/SSReader.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

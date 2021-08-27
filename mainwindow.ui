@@ -213,7 +213,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="vLayout4">
+     <layout class="QVBoxLayout" name="vLayout4" stretch="24,1">
       <item>
        <layout class="QVBoxLayout" name="vLayout4_1">
         <item>

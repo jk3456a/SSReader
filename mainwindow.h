@@ -6,6 +6,8 @@
 #include "subspage.h"
 #include "settingpage.h"
 #include "global.h"
+#include "nettool.h"
+#include "tinyxml2.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +38,8 @@ private:
     QStandardItemModel *model;
     SubsPage *subspage;
     SettingPage *setpage;
+    Internet *m_network;
+    QAxWidget* webWidget;
 
     int ViewWay;
 
@@ -48,9 +52,11 @@ private:
     void initTranslator();
 
 
+    void updateList();
+    void changeOverview (QString category);
 
-    void changeOverview(const QString *category);
-
+private slots:
+    void changeArticle(QString aurl);
 };
 
 #endif // MAINWINDOW_H

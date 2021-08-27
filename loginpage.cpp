@@ -72,7 +72,7 @@ void LoginPage::log_in(){
         QString uid = query->value(0).toString();
         QString user = query->value(1).toString();
         QString pass = query->value(2).toString();
-        qDebug() << user << pass ;
+        //qDebug() << user << pass ;
         if(User.compare(user)==0&&Pass.compare(pass)==0)
         {
             LogUser=User;
@@ -80,7 +80,6 @@ void LoginPage::log_in(){
             Loguid=uid;
             T1=true;
             this->hide();
-            //SSReader=new SSReaderPage(User);
             SSReader=new MainWindow();
             SSReader->show();
         }
