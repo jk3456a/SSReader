@@ -22,6 +22,8 @@
 #include <QStandardItem>
 #include <QTimer>
 #include <QDate>
+#include <QCryptographicHash>
+#include <QAction>
 
 #include <QJsonDocument>
 #include <QJsonObject>

@@ -8,10 +8,12 @@ SubsPage::SubsPage(QWidget *parent) :
 {
     ui->setupUi(this);
     //请求json
-    s_network= new Internet();
+    s_network= new NetTool();
     s_network->loadJson(QUrl("http://120.53.118.220:1200/api/routes"),&Routelist);
     qDebug()<<"下面是routes:"<<"\n"<<Routelist;
     //设置自动补全
+
+    ui->SubButton->setShortcut(tr("return"));
 
     QCompleter *completer = new QCompleter(Routelist, this);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
@@ -55,3 +57,9 @@ void SubsPage::on_SubButton_clicked()
 
 }
 
+
+void SubsPage::on_pushButton_clicked()
+{
+    QString surl = ui->SubLine->text();
+    //s_network->loadXml(surl);
+}

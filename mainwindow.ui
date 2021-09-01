@@ -215,11 +215,7 @@
     <item>
      <layout class="QVBoxLayout" name="vLayout4" stretch="24,1">
       <item>
-       <layout class="QVBoxLayout" name="vLayout4_1">
-        <item>
-         <widget class="QTextEdit" name="WholtArticle"/>
-        </item>
-       </layout>
+       <layout class="QVBoxLayout" name="vLayout4_1"/>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="12,1,1,1,1">

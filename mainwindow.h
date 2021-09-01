@@ -6,6 +6,7 @@
 #include "subspage.h"
 #include "settingpage.h"
 #include "global.h"
+#include "sqltool.h"
 #include "nettool.h"
 #include "tinyxml2.h"
 
@@ -38,8 +39,9 @@ private:
     QStandardItemModel *model;
     SubsPage *subspage;
     SettingPage *setpage;
-    Internet *m_network;
+    NetTool *m_network;
     QAxWidget* webWidget;
+    QString aurl;
 
     int ViewWay;
 

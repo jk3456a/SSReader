@@ -29,4 +29,5 @@ extern const QString read_art;
 extern const QString star_art;
 extern const QString wait_art;
 
+
 #endif // GLOBAL_H

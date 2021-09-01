@@ -22,10 +22,12 @@ public:
 private slots:
     void on_SubButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::SubsPage *ui;
     QCompleter *completer;
-    Internet *s_network;
+    NetTool *s_network;
     QStringList Routelist;
 };
 

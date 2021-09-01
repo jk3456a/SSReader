@@ -13,15 +13,15 @@ typedef struct {
     QByteArray response;
 } httpReply_t;
 
-class Internet : public QObject
+class NetTool : public QObject
 {
     Q_OBJECT
 public:
-    explicit Internet(QObject *parent = nullptr);
-    ~Internet();
+    explicit NetTool(QObject *parent = nullptr);
+    ~NetTool();
     bool loadJson(const QUrl &requestUrl, QStringList *Routelist);
-    bool loadXml(const QUrl &requestUrl, QString *XmlContent);
-    
+    void loadXml(const QUrl &requestUrl, QString *XmlContent);
+    //QString FindTitle(const QString sUrl);
 
 private:
     QNetworkAccessManager *manager;

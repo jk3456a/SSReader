@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    m_network = new Internet;
+    m_network = new NetTool;
     init();
 
 }
@@ -22,8 +22,8 @@ void MainWindow::init(){
     initBut();
     initTreeWidget();
     initListWidget();
-    /*initOther();
-    initStyle();
+    initOther();
+    /*initStyle();
     initTranslator();*/
 }
 
@@ -255,32 +255,48 @@ void MainWindow::updateList(){
         XMLError errXml = rssXml.Parse(xmlchar);
         if (XML_SUCCESS == errXml)
         {
-            XMLElement* channel = rssXml.RootElement();
-            qDebug()<<"这里是channel的text"<<channel->GetText();
+            XMLElement* root = rssXml.RootElement();
+            XMLElement* channel = root->FirstChildElement("channel");
             XMLElement* articleItem = channel->FirstChildElement("item");
             QSqlQuery *query2 = new QSqlQuery(db);
             while (articleItem)
             {
                 XMLElement *articleTitle = articleItem->FirstChildElement("title");
                 XMLElement *pubDate = articleItem->FirstChildElement("pubDate");
+                QString NatureDate = pubDate->GetText();
+                QString needDate = NatureDate.mid(NatureDate.indexOf(", "));
+                needDate.remove(0,2);
+                needDate.replace(" GMT","");
+                QString aidTime = reformatDate(&needDate,0);
+                //qDebug()<<"aidTime"<<aidTime;
+                needDate =reformatDate(&needDate,1);
+                //qDebug()<<"needDate"<<needDate;
+
                 XMLElement *articleLink = articleItem->FirstChildElement("link");
+                QString aidLink = QString(articleLink->GetText());
+                QByteArray Uniqueid = aidLink.mid(aidLink.size()-10).toUtf8();
+                QString strMd5 = QCryptographicHash::hash(Uniqueid, QCryptographicHash::Md5).toHex();
+                aidTime=aidTime+strMd5;
+                qDebug()<<articleTitle->GetText()<<aidTime<<Loguid<<needDate<<aidLink<<query->value(0).toString();
                 query2->prepare(insert_art);
-                query2->addBindValue(articleTitle->GetText());
-                query2->addBindValue(pubDate->GetText());
-                query2->addBindValue(articleLink->GetText());
+                query2->addBindValue(aidTime);
+                query2->addBindValue(QString(articleTitle->GetText()));
+                query2->addBindValue(needDate);
+                query2->addBindValue(aidLink);
                 query2->addBindValue(query->value(0).toString());
+                query2->addBindValue(Loguid);
                 if(!query2->exec()){
                     qDebug()<<"sql insert_art load error";
                 }
                 query2->clear();
-                articleItem->NextSiblingElement();
+                articleItem = articleItem->NextSiblingElement();
             }
         }
     }
     db.close();
 }
 void MainWindow::changeOverview(const QString category){
-    this->updateList();
+    //this->updateList();
     if(!db.isOpen()){
         db.open();
     }
@@ -291,29 +307,46 @@ void MainWindow::changeOverview(const QString category){
     if(!query->exec()){
         qDebug()<<"sql load_all_article load error";
     }
-    delete ui->OverView->widget()->layout();
+    //清空原来的内容
+    if(ui->OverView->widget()->layout()){
+        QLayoutItem *child;
+         while ((child = ui->OverView->widget()->layout()->takeAt(0)) != 0)
+         {
+                //setParent为NULL，防止删除之后界面不消失
+                if(child->widget())
+                {
+                    child->widget()->setParent(NULL);
+                }
+
+                delete child;
+         }
+        delete ui->OverView->widget()->layout();
+    }
+
     QVBoxLayout *overview = new QVBoxLayout;
     while(query->next()){
-        QPushButton *artBut = new QPushButton();
-        artBut->setText(query->value((0)).toString()+"\n"+query->value(1).toString());
+        QPushButton *artBut = new QPushButton();       artBut->setText(query->value((0)).toString()+"\n"+query->value(1).toString());
         artBut->setFixedHeight(60);
         QString aurl = query->value(2).toString();
-        connect(artBut,SIGNAL(clicked()),this,SLOT(changeArticle(aurl)));
+        connect(artBut,&QPushButton::clicked,this,[=](){changeArticle(aurl);});
         overview->addWidget(artBut);
     }
     ui->OverView->widget()->setLayout(overview);
+    ui->OverView->update();
 }
 
 void MainWindow::changeArticle(QString aurl){
-    QUrl Url = QUrl(aurl);
-    webWidget = new QAxWidget;
+    webWidget->dynamicCall("Navigate(const QString&)",aurl);
+
+}
+
+void MainWindow::initOther(){
+    webWidget = new QAxWidget(this);
+    ui->vLayout4_1->addWidget(webWidget);
     webWidget->setControl(QString::fromUtf8("{8856F961-340A-11D0-A96B-00C04FD705A2}"));
     webWidget->setObjectName(QString::fromUtf8("webWidget"));//设置控件的名称
     webWidget->setFocusPolicy(Qt::StrongFocus);//设置控件接收键盘焦点的方式：鼠标单击、Tab键
     webWidget->setProperty("DisplayAlerts",false); //不显示任何警告信息。
     webWidget->setProperty("DisplayScrollBars",true); // 显示滚动条
 
-    ui->vLayout4_1->addWidget(webWidget);
 }
-
-

@@ -1,13 +1,13 @@
 #include "nettool.h"
 
-Internet::Internet(QObject *parent) : QObject(parent){
+NetTool::NetTool(QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager(this);
 }
 
-Internet::~Internet(){
+NetTool::~NetTool(){
 }
 
-int Internet::httpRequest(const QUrl&requestUrl, httpReply_t *httpReply){
+int NetTool::httpRequest(const QUrl&requestUrl, httpReply_t *httpReply){
     QNetworkRequest request;
     QNetworkReply *reply;
     QVariant statusCode;
@@ -76,7 +76,7 @@ int Internet::httpRequest(const QUrl&requestUrl, httpReply_t *httpReply){
 
 }
 
-bool Internet::loadJson(const QUrl &requestUrl, QStringList *Routelist){
+bool NetTool::loadJson(const QUrl &requestUrl, QStringList *Routelist){
     httpReply_t reply;
     int retCode = 0;
 
@@ -114,22 +114,35 @@ bool Internet::loadJson(const QUrl &requestUrl, QStringList *Routelist){
     }
 }
 
-bool Internet::loadXml(const QUrl &requestUrl, QString *XmlContent){
+void NetTool::loadXml(const QUrl &requestUrl, QString *XmlContent){
     XmlContent->clear();
     httpReply_t reply;
     int retCode = 0;
 
     retCode = httpRequest(requestUrl, &reply);
     qDebug() << "Send finished response: " << retCode;
-    QString str(reply.response);
-    qDebug()<<"下面是str:"<<"\n"<<str;
+    QTextCodec *tc = QTextCodec::codecForName("UTF8");
+    QString str=tc->toUnicode(reply.response);
+    //qDebug()<<"下面是str:"<<"\n"<<str;
     if (str.isEmpty()){
             qDebug()<<"replyxml is empty!";
-            return false;
     }
     XmlContent->append(str);
-    return true;
+
 }
+
+//QString NetTool::FindTitle(const QString sUrl){
+//    httpReply_t reply;
+//    int retCode = 0;
+
+//    retCode = httpRequest(QUrl(sUrl), &reply);
+//    qDebug() << "Send finished response: " << retCode;
+//    QTextCodec *tc = QTextCodec::codecForName("UTF8");
+//    QString str=tc->toUnicode(reply.response);
+
+
+
+//}
 
 
 

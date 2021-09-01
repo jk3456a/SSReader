@@ -34,6 +34,8 @@ LoginPage::LoginPage(QWidget *parent) : QWidget(parent)
     Layout->setSpacing(10);
     Layout->setMargin(20);
 
+    LoginButton->setShortcut(tr("return"));
+
     //连接槽函数
     connect(LoginButton, SIGNAL(clicked()), this, SLOT(log_in()));
     connect(SignUpButton,SIGNAL(clicked()),this,SLOT(sign_up()));
